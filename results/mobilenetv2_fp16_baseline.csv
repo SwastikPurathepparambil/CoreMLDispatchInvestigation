@@ -1,0 +1,5 @@
+model,compute_units,mean_ms,median_ms
+all, mean_ms=0.50431498, median_ms=0.495167
+cpuOnly, mean_ms=2.1998000000000006, median_ms=2.191334
+cpuAndGPU, mean_ms=1.9584849800000002, median_ms=1.943167
+cpuAndNeuralEngine, mean_ms=0.4985683199999999, median_ms=0.498375
