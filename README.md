@@ -1,3 +1,51 @@
+# Setup Requirements
+
+## Requirements
+
+This project was built and tested on:
+
+- macOS 14.6
+- Apple Silicon Mac
+- Xcode with Core ML support
+- Python 3.11
+- `uv` for Python environment management
+- Core ML Tools
+- PyTorch / torchvision
+- transformers
+- pandas
+- matplotlib
+
+`MLComputePlan` requires macOS 14.4 or newer.
+
+---
+
+## Python Setup with uv
+
+From the project root, install and pin Python 3.11:
+
+```bash
+uv python install 3.11
+uv python pin 3.11
+uv sync
+uv add coremltools torch torchvision numpy pandas matplotlib tqdm transformers
+```
+
+If Core ML Tools warns that the installed PyTorch version is newer than the tested version, use the tested pair:
+```bash
+uv remove torch torchvision
+uv add "torch==2.7.0" "torchvision==0.22.0"
+```
+
+Then commit it:
+
+```bash
+git add SETUP.md
+git commit -m "Add setup requirements documentation"
+git push
+```
+
+# Results + Analysis
+
 Goal 1:
 We benchmarked five FP16 Core ML models across four compute-unit configurations: automatic/all, CPU-only, CPU+GPU, and CPU+Neural Engine. The model suite included two CNNs, one MLP, one transformer encoder-style model, and one tiny GPT-style generative transformer.
 
