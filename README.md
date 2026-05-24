@@ -21,9 +21,9 @@ The SimpleMLP model showed the opposite pattern. Its linear and ReLU operations 
 
 The transformer-style models were more complex. DistilBERT was mostly ANE-preferred, but its gather operation did not list ANE support and was CPU-preferred. TinyGPT was the most striking case: despite being fastest on CPU-only, MLComputePlan showed that nearly all non-constant operations were GPU-preferred under `.all`. This provides a plausible explanation for the large performance gap observed in Goal 1 and identifies TinyGPT as a strong candidate case of suboptimal automatic dispatch.
 
+After doing an fp32 vs fp16 ablation study, precision significantly affects dispatch behavior. In FP16, CNNs behaved like ANE-dispatched models, with .all matching .cpuAndNeuralEngine. In FP32, the same CNNs behaved more like GPU-dispatched models, with .all matching .cpuAndGPU and .cpuAndNeuralEngine becoming much slower. This supports the hypothesis that Core ML dispatch is sensitive to numerical precision, not only architecture type.
+
 Next Steps:
-1. Add FP32 conversion scripts or flags
-2. Run FP32 benchmark
 3. Do TinyGPT size ablation
 4. Do SimpleMLP size ablation
 5. Run Instruments on ResNet50 and TinyGPT

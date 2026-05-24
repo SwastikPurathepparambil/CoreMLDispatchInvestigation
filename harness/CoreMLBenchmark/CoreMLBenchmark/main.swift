@@ -2,11 +2,11 @@ import Foundation
 import CoreML
 
 let modelNames = [
-    "MobileNetV2_fp16",
-    "ResNet50_fp16",
-    "SimpleMLP_fp16",
-    "DistilBERT_fp16",
-    "TinyGPT_fp16"
+    "MobileNetV2_fp32",
+    "ResNet50_fp32",
+    "SimpleMLP_fp32",
+    "DistilBERT_fp32",
+    "TinyGPT_fp32"
 ]
 
 func loadModel(modelName: String, computeUnits: MLComputeUnits) throws -> MLModel {
@@ -30,17 +30,17 @@ func makeInput(modelName: String) throws -> MLFeatureProvider {
     let dataType: MLMultiArrayDataType
 
     switch modelName {
-    case "SimpleMLP_fp16":
+    case "SimpleMLP_fp16", "SimpleMLP_fp32":
         shape = [1, 1024]
         inputName = "input"
         dataType = .float32
 
-    case "DistilBERT_fp16":
+    case "DistilBERT_fp16", "DistilBERT_fp32":
         shape = [1, 128]
         inputName = "input_ids"
         dataType = .int32
 
-    case "TinyGPT_fp16":
+    case "TinyGPT_fp16", "TinyGPT_fp32":
         shape = [1, 64]
         inputName = "input_ids"
         dataType = .int32
