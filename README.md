@@ -44,6 +44,43 @@ git commit -m "Add setup requirements documentation"
 git push
 ```
 
+## Xcode Setup
+
+This repo does **not** track generated Core ML model packages (`*.mlpackage`) because they are large. After cloning the repo, you must regenerate the models locally and manually add them to the Xcode targets.
+
+### 1. Generate the Core ML models
+
+From the project root, run the Python conversion scripts.
+
+```bash
+uv run python convert_models/convert_mobilenetv2.py
+uv run python convert_models/convert_resnet50.py
+uv run python convert_models/convert_mlp.py
+uv run python convert_models/convert_distilbert.py
+uv run python convert_models/convert_tinygpt.py
+uv run python convert_models/convert_mobilenetv2_fp32.py
+uv run python convert_models/convert_resnet50_fp32.py
+uv run python convert_models/convert_mlp_fp32.py
+uv run python convert_models/convert_distilbert_fp32.py
+uv run python convert_models/convert_tinygpt_fp32.py
+```
+
+After this the model should generate:
+```bash
+MobileNetV2_fp16.mlpackage
+MobileNetV2_fp32.mlpackage
+ResNet50_fp16.mlpackage
+ResNet50_fp32.mlpackage
+SimpleMLP_fp16.mlpackage
+SimpleMLP_fp32.mlpackage
+DistilBERT_fp16.mlpackage
+DistilBERT_fp32.mlpackage
+TinyGPT_fp16.mlpackage
+TinyGPT_fp32.mlpackage
+```
+
+Then add the mlpackage files into the appropriate swift code files and run the CoreMLBenchmark
+
 # Results + Analysis
 
 ## Goal 1:
