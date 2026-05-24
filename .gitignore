@@ -1,0 +1,15 @@
+# Generated Core ML models
+*.mlpackage/
+*.mlmodelc/
+models/
+
+# Xcode build outputs and user state
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
