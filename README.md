@@ -74,4 +74,5 @@ After doing an fp32 vs fp16 ablation study, precision significantly affects disp
 Next Steps:
 1. Do TinyGPT size ablation
 2. Do SimpleMLP size ablation
-3. Run Instruments on ResNet50 and TinyGPT
+3. MLComputePlan on the ablation models
+4. Run Instruments on ResNet50 and TinyGPT
