@@ -79,7 +79,7 @@ TinyGPT_fp16.mlpackage
 TinyGPT_fp32.mlpackage
 ```
 
-Then add the mlpackage files into the appropriate swift code files and run the CoreMLBenchmark
+Then add the mlpackage files into the appropriate swift code files and run the CoreMLBenchmark/ComputePlanInspector
 
 # Results + Analysis
 
