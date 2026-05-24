@@ -1,0 +1,6 @@
+model_clean,CPU,GPU,ANE
+MobileNetV2,0.0,0.0,100.0
+ResNet50,0.0,0.0,122.0
+SimpleMLP,5.0,0.0,0.0
+DistilBERT,1.0,0.0,48.0
+TinyGPT,0.0,51.0,0.0
