@@ -12,3 +12,9 @@ CNNs: Why does .all ≈ cpuAndNeuralEngine?
 MLP: Why is CPU-only fastest?
 DistilBERT: Why is CPU-only slightly fastest?
 TinyGPT: Why is .all much worse than CPU-only?
+
+Using MLComputePlan, we inspected the estimated device usage of each Core ML model under the automatic `.all` configuration. The two CNN models showed a consistent ANE-preferred pattern: convolution, activation, pooling, residual addition, and linear operations were all predicted to prefer the Neural Engine. This matched the latency results, where `.all` and `.cpuAndNeuralEngine` were nearly identical.
+
+The SimpleMLP model showed the opposite pattern. Its linear and ReLU operations were CPU-preferred, matching the benchmark result where CPU-only execution was fastest.
+
+The transformer-style models were more complex. DistilBERT was mostly ANE-preferred, but its gather operation did not list ANE support and was CPU-preferred. TinyGPT was the most striking case: despite being fastest on CPU-only, MLComputePlan showed that nearly all non-constant operations were GPU-preferred under `.all`. This provides a plausible explanation for the large performance gap observed in Goal 1 and identifies TinyGPT as a strong candidate case of suboptimal automatic dispatch.

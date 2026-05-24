@@ -1,0 +1,142 @@
+model,field,value
+MODEL,MobileNetV2_fp16
+STRUCTURE,program
+FUNCTION_COUNT,1
+FUNCTION,main
+OPERATION_COUNT,539
+OPERATOR_SUMMARY_BEGIN
+const,439
+ios16.add,10
+ios16.clip,35
+ios16.conv,52
+ios16.linear,1
+ios16.reduce_mean,1
+ios16.reshape,1
+OPERATOR_SUMMARY_END
+OPERATOR_DEVICE_SUMMARY_BEGIN
+const,nil,439
+ios16.add,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),10
+ios16.clip,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),35
+ios16.conv,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),52
+ios16.linear,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),1
+ios16.reduce_mean,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),1
+ios16.reshape,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),1
+OPERATOR_DEVICE_SUMMARY_END
+TOTAL_OPERATIONS,539
+END_MODEL,MobileNetV2_fp16
+
+MODEL,ResNet50_fp16
+STRUCTURE,program
+FUNCTION_COUNT,1
+FUNCTION,main
+OPERATION_COUNT,503
+OPERATOR_SUMMARY_BEGIN
+const,381
+ios16.add,16
+ios16.conv,53
+ios16.linear,1
+ios16.max_pool,1
+ios16.reduce_mean,1
+ios16.relu,49
+ios16.reshape,1
+OPERATOR_SUMMARY_END
+OPERATOR_DEVICE_SUMMARY_BEGIN
+const,nil,381
+ios16.add,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),16
+ios16.conv,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),53
+ios16.linear,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),1
+ios16.max_pool,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),1
+ios16.reduce_mean,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),1
+ios16.relu,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),49
+ios16.reshape,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),1
+OPERATOR_DEVICE_SUMMARY_END
+TOTAL_OPERATIONS,503
+END_MODEL,ResNet50_fp16
+
+MODEL,SimpleMLP_fp16
+STRUCTURE,program
+FUNCTION_COUNT,1
+FUNCTION,main
+OPERATION_COUNT,11
+OPERATOR_SUMMARY_BEGIN
+const,6
+ios16.linear,3
+ios16.relu,2
+OPERATOR_SUMMARY_END
+OPERATOR_DEVICE_SUMMARY_BEGIN
+const,nil,6
+ios16.linear,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLCPUComputeDevice: 0x6000014ac0d0>)),3
+ios16.relu,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLCPUComputeDevice: 0x6000014ac0d0>)),2
+OPERATOR_DEVICE_SUMMARY_END
+TOTAL_OPERATIONS,11
+END_MODEL,SimpleMLP_fp16
+
+MODEL,DistilBERT_fp16
+STRUCTURE,program
+FUNCTION_COUNT,1
+FUNCTION,main
+OPERATION_COUNT,103
+OPERATOR_SUMMARY_BEGIN
+const,54
+ios16.add,5
+ios16.gather,1
+ios16.gelu,2
+ios16.layer_norm,5
+ios16.linear,12
+ios16.matmul,4
+ios16.mul,2
+ios16.reshape,8
+ios16.softmax,2
+transpose,8
+OPERATOR_SUMMARY_END
+OPERATOR_DEVICE_SUMMARY_BEGIN
+const,nil,54
+ios16.add,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),5
+ios16.gather,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3], preferred: <MLCPUComputeDevice: 0x6000014ac0d0>)),1
+ios16.gelu,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),2
+ios16.layer_norm,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),5
+ios16.linear,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),12
+ios16.matmul,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),4
+ios16.mul,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),2
+ios16.reshape,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),8
+ios16.softmax,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),2
+transpose,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLNeuralEngineComputeDevice: 0x60000148e5c0>)),8
+OPERATOR_DEVICE_SUMMARY_END
+TOTAL_OPERATIONS,103
+END_MODEL,DistilBERT_fp16
+
+MODEL,TinyGPT_fp16
+STRUCTURE,program
+FUNCTION_COUNT,1
+FUNCTION,main
+OPERATION_COUNT,119
+OPERATOR_SUMMARY_BEGIN
+const,68
+ios16.add,5
+ios16.gather,1
+ios16.gelu,2
+ios16.layer_norm,5
+ios16.linear,12
+ios16.matmul,4
+ios16.mul,2
+ios16.reshape,8
+ios16.softmax,2
+select,2
+transpose,8
+OPERATOR_SUMMARY_END
+OPERATOR_DEVICE_SUMMARY_BEGIN
+const,nil,68
+ios16.add,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLGPUComputeDevice: 0x6000014ac150> Apple M3)),5
+ios16.gather,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3], preferred: <MLGPUComputeDevice: 0x6000014ac150> Apple M3)),1
+ios16.gelu,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLGPUComputeDevice: 0x6000014ac150> Apple M3)),2
+ios16.layer_norm,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLGPUComputeDevice: 0x6000014ac150> Apple M3)),5
+ios16.linear,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLGPUComputeDevice: 0x6000014ac150> Apple M3)),12
+ios16.matmul,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLGPUComputeDevice: 0x6000014ac150> Apple M3)),4
+ios16.mul,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLGPUComputeDevice: 0x6000014ac150> Apple M3)),2
+ios16.reshape,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLGPUComputeDevice: 0x6000014ac150> Apple M3)),8
+ios16.softmax,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLGPUComputeDevice: 0x6000014ac150> Apple M3)),2
+select,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3], preferred: <MLGPUComputeDevice: 0x6000014ac150> Apple M3)),2
+transpose,Optional(CoreML.MLComputePlan.DeviceUsage(supported: [<MLCPUComputeDevice: 0x6000014ac0d0>, <MLGPUComputeDevice: 0x6000014ac150> Apple M3, <MLNeuralEngineComputeDevice: 0x60000148e5c0>], preferred: <MLGPUComputeDevice: 0x6000014ac150> Apple M3)),8
+OPERATOR_DEVICE_SUMMARY_END
+TOTAL_OPERATIONS,119
+END_MODEL,TinyGPT_fp16
