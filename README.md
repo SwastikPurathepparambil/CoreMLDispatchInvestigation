@@ -72,6 +72,6 @@ The transformer-style models were more complex. DistilBERT was mostly ANE-prefer
 After doing an fp32 vs fp16 ablation study, precision significantly affects dispatch behavior. In FP16, CNNs behaved like ANE-dispatched models, with .all matching .cpuAndNeuralEngine. In FP32, the same CNNs behaved more like GPU-dispatched models, with .all matching .cpuAndGPU and .cpuAndNeuralEngine becoming much slower. This supports the hypothesis that Core ML dispatch is sensitive to numerical precision, not only architecture type.
 
 Next Steps:
-3. Do TinyGPT size ablation
-4. Do SimpleMLP size ablation
-5. Run Instruments on ResNet50 and TinyGPT
+1. Do TinyGPT size ablation
+2. Do SimpleMLP size ablation
+3. Run Instruments on ResNet50 and TinyGPT
