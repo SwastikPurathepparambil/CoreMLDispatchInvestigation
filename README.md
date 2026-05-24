@@ -14,6 +14,7 @@ Questions to answer:
 4. TinyGPT: Why is .all much worse than CPU-only?
 
 Insights:
+
 Using MLComputePlan, we inspected the estimated device usage of each Core ML model under the automatic `.all` configuration. The two CNN models showed a consistent ANE-preferred pattern: convolution, activation, pooling, residual addition, and linear operations were all predicted to prefer the Neural Engine. This matched the latency results, where `.all` and `.cpuAndNeuralEngine` were nearly identical.
 
 The SimpleMLP model showed the opposite pattern. Its linear and ReLU operations were CPU-preferred, matching the benchmark result where CPU-only execution was fastest.
