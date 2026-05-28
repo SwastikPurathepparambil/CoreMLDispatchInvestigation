@@ -53,16 +53,16 @@ This repo does **not** track generated Core ML model packages (`*.mlpackage`) be
 From the project root, run the Python conversion scripts.
 
 ```bash
-uv run python convert_models/convert_mobilenetv2.py
-uv run python convert_models/convert_resnet50.py
-uv run python convert_models/convert_mlp.py
-uv run python convert_models/convert_distilbert.py
-uv run python convert_models/convert_tinygpt.py
-uv run python convert_models/convert_mobilenetv2_fp32.py
-uv run python convert_models/convert_resnet50_fp32.py
-uv run python convert_models/convert_mlp_fp32.py
-uv run python convert_models/convert_distilbert_fp32.py
-uv run python convert_models/convert_tinygpt_fp32.py
+uv run python convert_models/fp16/convert_mobilenetv2.py
+uv run python convert_models/fp16/convert_resnet50.py
+uv run python convert_models/fp16/convert_mlp.py
+uv run python convert_models/fp16/convert_distilbert.py
+uv run python convert_models/fp16/convert_tinygpt.py
+uv run python convert_models/fp32/convert_mobilenetv2_fp32.py
+uv run python convert_models/fp32/convert_resnet50_fp32.py
+uv run python convert_models/fp32/convert_mlp_fp32.py
+uv run python convert_models/fp32/convert_distilbert_fp32.py
+uv run python convert_models/fp32/convert_tinygpt_fp32.py
 ```
 
 After this the model should generate:
