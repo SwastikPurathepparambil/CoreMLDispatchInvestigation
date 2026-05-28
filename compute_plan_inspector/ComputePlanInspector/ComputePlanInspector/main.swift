@@ -2,156 +2,103 @@ import Foundation
 import CoreML
 
 let modelNames = [
-    "MobileNetV2_fp16",
-    "ResNet50_fp16",
-    "SimpleMLP_fp16",
-    "DistilBERT_fp16",
-    "TinyGPT_fp16"
+    "MobileNetV2_fp32",
+    "ResNet50_fp32",
+    "SimpleMLP_fp32",
+    "DistilBERT_fp32",
+    "TinyGPT_fp32"
 ]
 
-func modelURL(for modelName: String) throws -> URL {
-    guard let url = Bundle.main.url(forResource: modelName, withExtension: "mlmodelc") else {
+
+func loadModel(modelName: String, computeUnits: MLComputeUnits) throws -> MLModel {
+    let config = MLModelConfiguration()
+    config.computeUnits = computeUnits
+
+    guard let modelURL = Bundle.main.url(forResource: modelName, withExtension: "mlmodelc") else {
         throw NSError(
-            domain: "ComputePlanInspector",
+            domain: "CoreMLBenchmark",
             code: 1,
-            userInfo: [
-                NSLocalizedDescriptionKey: "Could not find compiled model \(modelName).mlmodelc"
-            ]
+            userInfo: [NSLocalizedDescriptionKey: "Missing model \(modelName)"]
         )
     }
 
-    return url
+    return try MLModel(contentsOf: modelURL, configuration: config)
 }
 
-func collectOperations(
-    from block: MLModelStructure.Program.Block,
-    into operations: inout [MLModelStructure.Program.Operation]
-) {
-    for operation in block.operations {
-        operations.append(operation)
 
-        for nestedBlock in operation.blocks {
-            collectOperations(from: nestedBlock, into: &operations)
-        }
-    }
-}
+func makeInput(modelName: String) throws -> MLFeatureProvider {
+    let shape: [NSNumber]
+    let inputName: String
+    let dataType: MLMultiArrayDataType
 
-func inspectModel(modelName: String) async throws {
-    print("MODEL,\(modelName)")
+    if modelName.contains("SimpleMLP") {
+        shape = [1, 1024]
+        inputName = "input"
+        dataType = .float32
 
-    let url = try modelURL(for: modelName)
+    } else if modelName.contains("DistilBERT") {
+        shape = [1, 128]
+        inputName = "input_ids"
+        dataType = .int32
 
-    let config = MLModelConfiguration()
-    config.computeUnits = .all
+    } else if modelName.contains("TinyGPT") {
+        shape = [1, 64]
+        inputName = "input_ids"
+        dataType = .int32
 
-    let computePlan = try await MLComputePlan.load(
-        contentsOf: url,
-        configuration: config
-    )
-
-    switch computePlan.modelStructure {
-
-    case .program(let program):
-        print("STRUCTURE,program")
-        print("FUNCTION_COUNT,\(program.functions.count)")
-
-        var allOperations: [MLModelStructure.Program.Operation] = []
-
-        for (functionName, function) in program.functions {
-            var functionOperations: [MLModelStructure.Program.Operation] = []
-            collectOperations(from: function.block, into: &functionOperations)
-
-            print("FUNCTION,\(functionName)")
-            print("OPERATION_COUNT,\(functionOperations.count)")
-
-            allOperations.append(contentsOf: functionOperations)
-        }
-
-        
-        var operatorCounts: [String: Int] = [:]
-        var operatorDeviceCounts: [String: Int] = [:]
-
-        for operation in allOperations {
-            let operatorName = operation.operatorName
-            operatorCounts[operatorName, default: 0] += 1
-
-            let usage = computePlan.deviceUsage(for: operation)
-            let usageString = String(describing: usage)
-
-            let key = "\(operatorName),\(usageString)"
-            operatorDeviceCounts[key, default: 0] += 1
-        }
-
-        print("OPERATOR_SUMMARY_BEGIN")
-
-        for (operatorName, count) in operatorCounts.sorted(by: { $0.key < $1.key }) {
-            print("\(operatorName),\(count)")
-        }
-
-        print("OPERATOR_SUMMARY_END")
-
-        print("OPERATOR_DEVICE_SUMMARY_BEGIN")
-
-        for (key, count) in operatorDeviceCounts.sorted(by: { $0.key < $1.key }) {
-            print("\(key),\(count)")
-        }
-
-        print("OPERATOR_DEVICE_SUMMARY_END")
-
-        print("TOTAL_OPERATIONS,\(allOperations.count)")
-        
-
-    case .neuralNetwork(let network):
-        print("STRUCTURE,neuralNetwork")
-        print("LAYER_COUNT,\(network.layers.count)")
-
-        var layerTypeCounts: [String: Int] = [:]
-
-        for layer in network.layers {
-            let layerDescription = String(describing: layer)
-            layerTypeCounts[layerDescription, default: 0] += 1
-        }
-
-        print("LAYER_SUMMARY_BEGIN")
-
-        for (layerType, count) in layerTypeCounts.sorted(by: { $0.key < $1.key }) {
-            print("\(layerType),\(count)")
-        }
-
-        print("LAYER_SUMMARY_END")
-
-    case .pipeline(let pipeline):
-        print("STRUCTURE,pipeline")
-        print("PIPELINE_MODELS,\(pipeline.subModels.count)")
-
-    case .unsupported:
-        print("STRUCTURE,unsupported")
-
-    @unknown default:
-        print("STRUCTURE,unknown")
+    } else {
+        shape = [1, 3, 224, 224]
+        inputName = "input"
+        dataType = .float32
     }
 
-    print("END_MODEL,\(modelName)")
-    print("")
-}
+    let inputArray = try MLMultiArray(shape: shape, dataType: dataType)
 
-let semaphore = DispatchSemaphore(value: 0)
-
-print("model,field,value")
-
-Task.detached {
-    do {
-        for modelName in modelNames {
-            try await inspectModel(modelName: modelName)
+    for i in 0..<inputArray.count {
+        if dataType == .int32 {
+            inputArray[i] = NSNumber(value: Int32(i % 100))
+        } else {
+            inputArray[i] = NSNumber(value: Float(0.5))
         }
-
-        print("COMPUTE_PLAN_INSPECTOR_DONE")
-    } catch {
-        print("ERROR,\(error)")
     }
 
-    fflush(stdout)
-    semaphore.signal()
+    return try MLDictionaryFeatureProvider(dictionary: [
+        inputName: inputArray
+    ])
 }
 
-semaphore.wait()
+func benchmark(modelName: String, computeUnits: MLComputeUnits, label: String) throws {
+
+    let model = try loadModel(modelName: modelName, computeUnits: computeUnits)
+    let input = try makeInput(modelName: modelName)
+
+    // Warmup PER CONFIG
+    for _ in 0..<10 {
+        _ = try model.prediction(from: input)
+    }
+
+    var times: [Double] = []
+
+    for _ in 0..<50 {
+        let start = CFAbsoluteTimeGetCurrent()
+        _ = try model.prediction(from: input)
+        let end = CFAbsoluteTimeGetCurrent()
+
+        times.append((end - start) * 1000.0)
+    }
+
+    let sorted = times.sorted()
+    let median = sorted[sorted.count / 2]
+    let mean = times.reduce(0, +) / Double(times.count)
+
+    print("\(modelName),\(label),\(mean),\(median)")
+}
+
+print("model,compute_units,mean_ms,median_ms")
+
+for modelName in modelNames {
+    try benchmark(modelName: modelName, computeUnits: .all, label: "all")
+    try benchmark(modelName: modelName, computeUnits: .cpuOnly, label: "cpuOnly")
+    try benchmark(modelName: modelName, computeUnits: .cpuAndGPU, label: "cpuAndGPU")
+    try benchmark(modelName: modelName, computeUnits: .cpuAndNeuralEngine, label: "cpuAndNeuralEngine")
+}
